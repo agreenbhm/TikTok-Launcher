@@ -9,15 +9,14 @@ A simple Android app designed to be the default handler for links to the TikTok.
 4. In Termux, install `python3` and install `zeroconf` module via pip.
 5. In Termux, install `adb` via `pkg` command.
 6. Copy `adb_port.sh` and `launch_tiktok.py` to the home directory in Termux.
-7. Import `TikTok.tsk.xml` into Tasker.
+7. Import 4 Tasker profile files (`*.prf.xml`) into Tasker.  You don't need to import `TikTok.tsk.xml`.
 8. Verify/change specified browser package within Tasker task to point to browser of choice (Samsung Internet is the one currently selected).
-9. Import 4 Tasker profile (`*.prf.xml`) into Tasker.
-10. (If managed/work profile doesn't already exist) Install `Island` (https://play.google.com/store/apps/details?id=com.oasisfeng.island&hl=en&gl=US&pli=1).
+9. (If managed/work profile doesn't already exist) Install `Island` (https://play.google.com/store/apps/details?id=com.oasisfeng.island&hl=en&gl=US&pli=1).
     * If profile already exists determine profile ID number and update `launch_tiktok.py`, on the line that mentions `--user 10`.  Change 10 to whatever the profile ID number is.
-11. Enable ADB wireless via Developer Tools.
-12. Pair Termux ADB with ADB wireless using the pairing code option.
-13. Disable timeout authorization for ADB in Developer Tools, otherwise this will stop working after a week and you'll need to re-pair ADB.
-14. Install official `TikTok` app within Island.
+10. Enable ADB wireless via Developer Tools.
+11. Pair Termux ADB with ADB wireless using the pairing code option.
+12. Disable timeout authorization for ADB in Developer Tools, otherwise this will stop working after a week and you'll need to re-pair ADB.
+13. Install official `TikTok` app within Island.
 
 
 Additional permissions are likely to be requested by Tasker when running the profile, so test it out a few times to make sure that all permissions are granted.  You'll need to use ADB to grant certain permissions.  You'll also need to grant Takser permission to access Termux, which is in the Android permissions settings page for Tasker.
@@ -26,4 +25,4 @@ Additional permissions are likely to be requested by Tasker when running the pro
 When everything is set up properly, you should be able to click a TikTok link anywhere within your primary Android profile and have it open in your Island/managed/work profile.
 
 ## How it works
-1. When you click a TikTok link
+TBD
