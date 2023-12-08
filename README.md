@@ -34,6 +34,11 @@ When everything is set up properly, you should be able to click a TikTok link an
       1. Enable `ADB Wireless`.
       2. If the URL sent in the intent matches `*.tiktok.com*`, proceed.  If not, exit.
       3. If the work profile is enabled (according to the `%MANAGED_PROFILE_AVAILABLE` global variable), proceed.  If not, then turn on the work profile via a built-in Tasker action and then proceed.
-      4. Run a command in Termux of `/data/data/com.termux/files/home/adb_port.sh %data`, with `%data` being the TikTok URL received by the intent.
-      5. 
+      4. Run a command in Termux of `/data/data/com.termux/files/home/adb_port.sh %data`, with the `%data` argument being the TikTok URL received by the intent.
+      5. `adb_port.sh` starts, checking for the presence of a file `adb_port.txt` containing the port number of the ADB Wireless port to connect to.  If this file doesn't exist a dummy file is created with the value `12345`.  The value of that file is then stored in the `$PORT` variable.
+      6. `adb connect localhost:$PORT` is run to attempt to determine if the device's ADB server is accessible.
+      7. If ADB is accessible, the `am` command is run via ADB for the specified work profile ID (default is 10) with the TikTok URL as the argument.  This launches the default handler for TikTok URLs within the work profile, which should be the real TikTok app.  Then ADB disconnects and the script exits.
+      8. If ADB is not accessible, the command `/data/data/com.termux/files/home/launch_tiktok.py $1` is run (with the `$1` argument being the TikTok URL).
+      9. The `launch_tiktok.py` command launches, using the `zeroconf` Python module to determine the port number of the `"_adb-tls-connect._tcp.local.` service (the ADB wireless port).  Then `adb connect` is run to connect to localhost on the discovered port.  After that, the port number is written to `adb_port.txt` for future use.
+      10. Finally, `am start` is run via ADB (like described in step 7), which launches the default handler for the TikTok URL in the work profile (which should be the official TikTok app).
      
