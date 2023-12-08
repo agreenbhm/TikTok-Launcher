@@ -12,7 +12,7 @@ Consists of scripts, Tasker profiles, and a simple Android app designed to be th
 5. In Termux, install `adb` via `pkg` command.
 6. Copy `adb_port.sh` and `launch_tiktok.py` to the home directory in Termux.
 7. Import 3 Tasker profile files (`*.prf.xml`) into Tasker.
-8. Verify/change specified browser package within Tasker task to point to browser of choice (Samsung Internet is the one currently selected).
+8. Verify/change default browser package within Tasker `TikTok` task (the `Send Intent` step, at the end) to point to browser of choice (Samsung Internet, ie `com.sec.android.app.sbrowser` is the one currently selected; to specify Google Chrome change this to `com.android.chrome`).
 9. (If managed/work profile doesn't already exist) Install `Island` (https://play.google.com/store/apps/details?id=com.oasisfeng.island&hl=en&gl=US&pli=1).
     * If profile already exists determine profile ID number and update `launch_tiktok.py`, on the line that mentions `--user 10`.  Change 10 to whatever the profile ID number is.
 10. Enable ADB wireless via Developer Tools.
@@ -43,6 +43,10 @@ When everything is set up properly, you should be able to click a TikTok link an
       8. If ADB is not accessible, the command `/data/data/com.termux/files/home/launch_tiktok.py $1` is run (with the `$1` argument being the TikTok URL).
       9. The `launch_tiktok.py` command launches, using the `zeroconf` Python module to determine the port number of the `"_adb-tls-connect._tcp.local.` service (the ADB wireless port).  Then `adb connect` is run to connect to localhost on the discovered port.  After that, the port number is written to `adb_port.txt` for future use.
       10. Finally, `am start` is run via ADB (like described in step 7), which launches the default handler for the TikTok URL in the work profile (which should be the official TikTok app).
+    
+## Troubleshooting
+* Ensure the ADB client within Termux is paired with your device.  By default, after 7 days, paired devices will be removed unless you enable the Developer Options setting `Disable adb authorization timeout`.  If this occurs, re-pair your Termux ADB client with the device using the standard ADB wireless pairing process.
+* Ensure all permissions necessary are granted to Tasker and possibly Termux.  Tasker is pretty good about notifying you when permissions are needed to be granted, either via the device settings or via ADB.  Known required permissions for Tasker are: change system settings, write secure settings, modify work profile, run commands in Termux environment. 
 
 ## Modify for different app
 1. Update the handled URLs within the Android app to reflect the URLs you wish to process.
