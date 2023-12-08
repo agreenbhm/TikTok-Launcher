@@ -25,4 +25,6 @@ Additional permissions are likely to be requested by Tasker when running the pro
 When everything is set up properly, you should be able to click a TikTok link anywhere within your primary Android profile and have it open in your Island/managed/work profile.
 
 ## How it works
-TBD
+1. When the work profile is enabled or disabled, a global variable called `%MANAGED_PROFILE_AVAILABLE` is updated.  This is used by the TikTok launching tasks to determine whether or not the work profile should be started and waited for.  If the profile is already enabled the enabling step will be skipped, decreasing time to launch TikTok.
+2. When a TikTok URL is clicked, the TikTok Launcher app will open (as it is the default handler for `*.tiktok.com` URLs).  Upon opening, this app will take the URL it receives and send it as the data in a new broadcast intent sent to `tiktok.LAUNCH`.
+3. Two profiles created within Tasker (`TikTok Intent With WiFi` and `TikTok Intent Without WiFi`) are set to listen for broadcasts to `tiktok.LAUNCH`.  The profile used is determined based on whether or not the device is connected to wifi.  If the device is connected to wifi, the This is due to the inability to use ADB wireless (a required step)
