@@ -43,4 +43,11 @@ When everything is set up properly, you should be able to click a TikTok link an
       8. If ADB is not accessible, the command `/data/data/com.termux/files/home/launch_tiktok.py $1` is run (with the `$1` argument being the TikTok URL).
       9. The `launch_tiktok.py` command launches, using the `zeroconf` Python module to determine the port number of the `"_adb-tls-connect._tcp.local.` service (the ADB wireless port).  Then `adb connect` is run to connect to localhost on the discovered port.  After that, the port number is written to `adb_port.txt` for future use.
       10. Finally, `am start` is run via ADB (like described in step 7), which launches the default handler for the TikTok URL in the work profile (which should be the official TikTok app).
-     
+
+## Modify for different app
+1. Update the handled URLs within the Android app to reflect the URLs you wish to process.
+2. Update the intent being sent within the Android app to reflect the app you wish to launch, ie change `tiktok.LAUNCH` to `newapp.LAUNCH`.
+3. Build and install the app.
+4. Edit the `TikTok Intent Received` Tasker profile to set the received intent to the new one specified in step 2.
+5. Edit the `TikTok` Tasker task to match the `%data` variable with the newly configured URLs from step 1.
+
