@@ -9,7 +9,7 @@ A simple Android app designed to be the default handler for links to the TikTok.
 4. In Termux, install `python3` and install `zeroconf` module via pip.
 5. In Termux, install `adb` via `pkg` command.
 6. Copy `adb_port.sh` and `launch_tiktok.py` to the home directory in Termux.
-7. Import 4 Tasker profile files (`*.prf.xml`) into Tasker.  You don't need to import `TikTok.tsk.xml`.
+7. Import 3 Tasker profile files (`*.prf.xml`) into Tasker.
 8. Verify/change specified browser package within Tasker task to point to browser of choice (Samsung Internet is the one currently selected).
 9. (If managed/work profile doesn't already exist) Install `Island` (https://play.google.com/store/apps/details?id=com.oasisfeng.island&hl=en&gl=US&pli=1).
     * If profile already exists determine profile ID number and update `launch_tiktok.py`, on the line that mentions `--user 10`.  Change 10 to whatever the profile ID number is.
@@ -25,6 +25,15 @@ Additional permissions are likely to be requested by Tasker when running the pro
 When everything is set up properly, you should be able to click a TikTok link anywhere within your primary Android profile and have it open in your Island/managed/work profile.
 
 ## How it works
-1. When the work profile is enabled or disabled, a global variable called `%MANAGED_PROFILE_AVAILABLE` is updated.  This is used by the TikTok launching tasks to determine whether or not the work profile should be started and waited for.  If the profile is already enabled the enabling step will be skipped, decreasing time to launch TikTok.
+1. When the work profile is enabled or disabled, a global variable called `%MANAGED_PROFILE_AVAILABLE` is updated via the profiles `Work Profile Enabled` and `Work Profile Disabled` (two profiles are necessary as there is a different intent sent for enabled vs disabled, and Tasker only supports 1 intent received event per-profile).  This is used by the TikTok launching task to determine whether or not the work profile should be started and waited for.  If the profile is already enabled the enabling step will be skipped, decreasing time to launch TikTok.
 2. When a TikTok URL is clicked, the TikTok Launcher app will open (as it is the default handler for `*.tiktok.com` URLs).  Upon opening, this app will take the URL it receives and send it as the data in a new broadcast intent sent to `tiktok.LAUNCH`.
-3. Two profiles created within Tasker (`TikTok Intent With WiFi` and `TikTok Intent Without WiFi`) are set to listen for broadcasts to `tiktok.LAUNCH`.  The profile used is determined based on whether or not the device is connected to wifi.  If the device is connected to wifi, the This is due to the inability to use ADB wireless (a required step)
+3. A profile created within Tasker (`TikTok Intent Received`) is set to listen for broadcasts to `tiktok.LAUNCH`.  Upon receiving this intent, the `TikTok` task is started, which runs the following steps:
+   * Check whether or not Wifi is connected
+     1. If is is not, send an intent of `android.intent.action.VIEW` to a specific package (should be set to your default browser) with the TikTok URL as the data.  This will open your default browser to the TikTok URL.  Then exit.  This is a fallback step for when Wifi is not connected, as the necessary ADB commands for launching work profile apps will not work without Wifi.
+   * If Wifi is connected:
+      1. Enable `ADB Wireless`.
+      2. If the URL sent in the intent matches `*.tiktok.com*`, proceed.  If not, exit.
+      3. If the work profile is enabled (according to the `%MANAGED_PROFILE_AVAILABLE` global variable), proceed.  If not, then turn on the work profile via a built-in Tasker action and then proceed.
+      4. Run a command in Termux of `/data/data/com.termux/files/home/adb_port.sh %data`, with `%data` being the TikTok URL received by the intent.
+      5. 
+     
