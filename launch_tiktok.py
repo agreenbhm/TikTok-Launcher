@@ -15,7 +15,7 @@ class MyListener(ServiceListener):
         #sys.stdout.write(str(info.port))
         os.system("/data/data/com.termux/files/usr/bin/adb connect localhost:" + str(info.port))
         os.system("echo " + str(info.port) + " > /data/data/com.termux/files/home/adb_port.txt")
-        os.system("/data/data/com.termux/files/usr/bin/adb shell am start --user 10 " + sys.argv[1])
+        os.system("/data/data/com.termux/files/usr/bin/adb shell am start --user 10 \"" + sys.argv[1] + "\"")
         os.system("/data/data/com.termux/files/usr/bin/adb disconnect")
 
 zeroconf = Zeroconf()
