@@ -1,8 +1,7 @@
-<TaskerData sr="" dvi="1" tv="6.2.12-rc">
+<TaskerData sr="" dvi="1" tv="6.3.8-beta">
 	<Profile sr="prof32" ve="2">
 		<cdate>1701263941937</cdate>
-		<clp>true</clp>
-		<edate>1702046076264</edate>
+		<edate>1717848524736</edate>
 		<flags>8</flags>
 		<id>32</id>
 		<mid0>28</mid0>
@@ -18,7 +17,7 @@
 	</Profile>
 	<Task sr="task28">
 		<cdate>1701209869715</cdate>
-		<edate>1702045922788</edate>
+		<edate>1717848534229</edate>
 		<id>28</id>
 		<nme>TikTok</nme>
 		<pri>6</pri>
@@ -158,7 +157,7 @@ true if it after the action the setting is enabled, false if not&lt;/_array_net.
 			<code>1256900802</code>
 			<Bundle sr="arg0">
 				<Vals sr="val">
-					<com.termux.execute.arguments>%data</com.termux.execute.arguments>
+					<com.termux.execute.arguments>"%data"</com.termux.execute.arguments>
 					<com.termux.execute.arguments-type>java.lang.String</com.termux.execute.arguments-type>
 					<com.termux.tasker.extra.BACKGROUND_CUSTOM_LOG_LEVEL>&lt;null&gt;</com.termux.tasker.extra.BACKGROUND_CUSTOM_LOG_LEVEL>
 					<com.termux.tasker.extra.BACKGROUND_CUSTOM_LOG_LEVEL-type>java.lang.String</com.termux.tasker.extra.BACKGROUND_CUSTOM_LOG_LEVEL-type>
@@ -166,7 +165,7 @@ true if it after the action the setting is enabled, false if not&lt;/_array_net.
 					<com.termux.tasker.extra.EXECUTABLE-type>java.lang.String</com.termux.tasker.extra.EXECUTABLE-type>
 					<com.termux.tasker.extra.SESSION_ACTION>&lt;null&gt;</com.termux.tasker.extra.SESSION_ACTION>
 					<com.termux.tasker.extra.SESSION_ACTION-type>java.lang.String</com.termux.tasker.extra.SESSION_ACTION-type>
-					<com.termux.tasker.extra.STDIN>&lt;null&gt;</com.termux.tasker.extra.STDIN>
+					<com.termux.tasker.extra.STDIN></com.termux.tasker.extra.STDIN>
 					<com.termux.tasker.extra.STDIN-type>java.lang.String</com.termux.tasker.extra.STDIN-type>
 					<com.termux.tasker.extra.TERMINAL>false</com.termux.tasker.extra.TERMINAL>
 					<com.termux.tasker.extra.TERMINAL-type>java.lang.Boolean</com.termux.tasker.extra.TERMINAL-type>
@@ -176,12 +175,12 @@ true if it after the action the setting is enabled, false if not&lt;/_array_net.
 					<com.termux.tasker.extra.WAIT_FOR_RESULT-type>java.lang.Boolean</com.termux.tasker.extra.WAIT_FOR_RESULT-type>
 					<com.termux.tasker.extra.WORKDIR>/data/data/com.termux/files/home</com.termux.tasker.extra.WORKDIR>
 					<com.termux.tasker.extra.WORKDIR-type>java.lang.String</com.termux.tasker.extra.WORKDIR-type>
-					<com.twofortyfouram.locale.intent.extra.BLURB>/data/data/com.termux/files/home/adb_port.sh %data
+					<com.twofortyfouram.locale.intent.extra.BLURB>/data/data/com.termux/files/home/adb_port.sh "%data"
 
 Working Directory ✓
 Stdin ✕
 Custom Log Level null
-Terminal Session ✕</com.twofortyfouram.locale.intent.extra.BLURB>
+Terminal Session</com.twofortyfouram.locale.intent.extra.BLURB>
 					<com.twofortyfouram.locale.intent.extra.BLURB-type>java.lang.String</com.twofortyfouram.locale.intent.extra.BLURB-type>
 					<net.dinglisch.android.tasker.RELEVANT_VARIABLES>&lt;StringArray sr=""&gt;&lt;_array_net.dinglisch.android.tasker.RELEVANT_VARIABLES0&gt;%stdout
 Standard Output
